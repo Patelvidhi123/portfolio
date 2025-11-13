@@ -887,30 +887,28 @@ body.dark #scrollTopBtn:hover {
   
 </script>
 
-  <script>
+ <script>
+  // 🚀 Create and style the rocket button
   const scrollTopBtn = document.createElement("button");
   scrollTopBtn.id = "scrollTopBtn";
   scrollTopBtn.innerHTML = "🚀";
   document.body.appendChild(scrollTopBtn);
 
-  // Show the button when user scrolls down
-  window.onscroll = () => {
-    if (document.documentElement.scrollTop > 100) {
+  // Show/hide on scroll
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
       scrollTopBtn.classList.add("show");
     } else {
       scrollTopBtn.classList.remove("show");
     }
-  };
+  });
 
-  // Fly animation when clicked
+  // Fly when clicked
   scrollTopBtn.addEventListener("click", () => {
     scrollTopBtn.classList.add("flying");
     scrollTopBtn.style.animation = "rocketFly 1.2s forwards";
-
-    // Scroll to top smoothly
     window.scrollTo({ top: 0, behavior: "smooth" });
 
-    // Reset after animation ends
     setTimeout(() => {
       scrollTopBtn.classList.remove("flying");
       scrollTopBtn.style.animation = "";
@@ -925,6 +923,7 @@ body.dark #scrollTopBtn:hover {
 </body>
 
 </html>
+
 
 
 
