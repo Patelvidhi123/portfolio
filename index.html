@@ -882,32 +882,6 @@ body.dark #scrollTopBtn:hover {
   }
 
 
-// Scroll to Top Rocket Animation
-const scrollTopBtn = document.getElementById("scrollTopBtn");
-
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 300) {
-    scrollTopBtn.classList.add("show");
-  } else {
-    scrollTopBtn.classList.remove("show");
-  }
-});
-
-scrollTopBtn.addEventListener("click", () => {
-  scrollTopBtn.style.animation = "rocketFly 1s ease forwards";
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-
-  setTimeout(() => {
-    scrollTopBtn.style.animation = "";
-  }, 1000);
-});
-
-});
-
   
 
   
@@ -951,6 +925,7 @@ scrollTopBtn.addEventListener("click", () => {
 </body>
 
 </html>
+
 
 
 
