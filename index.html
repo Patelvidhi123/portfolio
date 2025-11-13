@@ -681,9 +681,13 @@ body.dark .toggle-btn {
     <p>© 2025 Vidhi Kalariya. All Rights Reserved.</p>
   </footer>
 
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
   // Scroll animation
   const faders = document.querySelectorAll('.fade-in');
+
   window.addEventListener('scroll', () => {
     faders.forEach(fade => {
       const rect = fade.getBoundingClientRect().top;
@@ -695,114 +699,102 @@ body.dark .toggle-btn {
 
   // Dark/Light Mode Toggle
   const toggleBtn = document.getElementById("toggleTheme");
+
   toggleBtn.addEventListener("click", () => {
     document.body.classList.toggle("dark");
-    toggleBtn.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+    if (document.body.classList.contains("dark")) {
+      toggleBtn.textContent = "☀️";
+    } else {
+      toggleBtn.textContent = "🌙";
+    }
   });
 
   // Typing Animation
-  const words = ["Web Developer 💻", "Designer 🎨", "Freelancer 👩‍💻", "Creative Thinker 🌈"];
+  const words = ["Web Developer", "Designer", "Freelancer"];
   let i = 0;
   let j = 0;
   let currentWord = "";
   let isDeleting = false;
-  const typingElement = document.getElementById("typing");
 
   function type() {
     currentWord = words[i];
-    if (isDeleting) {
-      typingElement.textContent = currentWord.substring(0, j--);
+    let displayText = currentWord.substring(0, j);
+    document.getElementById("typing").textContent = displayText;
+
+    if (!isDeleting && j < currentWord.length) {
+      j++;
+      setTimeout(type, 120);
+    } else if (isDeleting && j > 0) {
+      j--;
+      setTimeout(type, 60);
     } else {
-      typingElement.textContent = currentWord.substring(0, j++);
+      if (!isDeleting) {
+        isDeleting = true;
+        setTimeout(type, 1000);
+      } else {
+        isDeleting = false;
+        i = (i + 1) % words.length;
+        setTimeout(type, 200);
+      }
     }
-
-    let speed = isDeleting ? 80 : 150;
-
-    if (!isDeleting && j === currentWord.length) {
-      speed = 1200;
-      isDeleting = true;
-    } else if (isDeleting && j === 0) {
-      isDeleting = false;
-      i = (i + 1) % words.length;
-      speed = 500;
-    }
-
-    setTimeout(type, speed);
   }
 
   type();
 
-  // Confetti Generator 🎉
-  const confettiContainer = document.querySelector('.confetti');
-  const colors = ['#ff4d6d', '#fbc2eb', '#84fab0', '#ffb6c1', '#a18cd1', '#66b2ff'];
+  // Contact form message
+  const form = document.getElementById('contactForm');
+  const msgDiv = document.getElementById('form-message');
 
-  for (let i = 0; i < 30; i++) {
-    const conf = document.createElement('span');
-    conf.style.background = colors[Math.floor(Math.random() * colors.length)];
-    conf.style.left = `${Math.random() * 100}%`;
-    conf.style.animationDuration = `${4 + Math.random() * 4}s`;
-    conf.style.animationDelay = `${Math.random() * 5}s`;
-    confettiContainer.appendChild(conf);
-  }
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
+    const formData = new FormData(form);
 
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
 
-
-//contact form massage
-const form = document.getElementById('contactForm');
-const msgDiv = document.getElementById('form-message');
-
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  const formData = new FormData(form);
-  
-  const response = await fetch(form.action, {
-    method: 'POST',
-    body: formData,
-    headers: {
-      'Accept': 'application/json'
+    if (response.ok) {
+      msgDiv.textContent = "Message sent successfully!";
+      form.reset();
+    } else {
+      msgDiv.textContent = "Oops! Something went wrong.";
+      msgDiv.style.color = "red";
     }
   });
 
-  if (response.ok) {
-    msgDiv.textContent = "Message sent successfully!";
-    form.reset();
-  } else {
-    msgDiv.textContent = "Oops! Something went wrong.";
-    msgDiv.style.color = "red";
+  // Confetti animation
+  const confettiContainer = document.querySelector('.confetti');
+
+  // Generate random stars, candies, and dots
+  for (let i = 0; i < 20; i++) {
+    const elem = document.createElement('span');
+
+    // Randomly assign class
+    const types = ["dot", "star", "candy"];
+    const type = types[Math.floor(Math.random() * types.length)];
+
+    if (type !== "dot") elem.classList.add(type);
+
+    // Position & color
+    elem.style.left = Math.random() * 100 + "vw";
+    elem.style.animationDuration = (3 + Math.random() * 5) + "s";
+
+    if (type === "dot") {
+      elem.style.backgroundColor = [
+        "#ff4d6d",
+        "#66b2ff",
+        "#ffd700",
+        "#84fab0"
+      ][Math.floor(Math.random() * 4)];
+    }
+
+    confettiContainer.appendChild(elem);
   }
-});
-
-
-
-
-
-const confettiContainer = document.querySelector('.confetti');
-
-// Generate random stars, candies, and dots
-for (let i = 0; i < 20; i++) {
-  const elem = document.createElement('span');
-
-  // Randomly assign class
-  const types = ["dot", "star", "candy"];
-  const type = types[Math.floor(Math.random() * types.length)];
-  if (type !== "dot") elem.classList.add(type);
-
-  // Position & color
-  elem.style.left = Math.random() * 100 + "vw";
-  elem.style.animationDuration = (3 + Math.random() * 5) + "s";
-
-  if (type === "dot") {
-    elem.style.backgroundColor = ["#ff4d6d", "#66b2ff", "#ffd700", "#84fab0"][Math.floor(Math.random() * 4)];
-  }
-
-  confettiContainer.appendChild(elem);
-}
-
-
-
-  </script>
+</script>
 </body>
 </html>
+
 
