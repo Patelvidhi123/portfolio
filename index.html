@@ -766,6 +766,10 @@ body.dark #scrollTopBtn:hover {
   <footer>
     <p>© 2025 Vidhi Kalariya. All Rights Reserved.</p>
   </footer>
+
+  <p>
+  👀 Visitors: <span id="visitor-count">Loading...</span>
+</p>
   
 
 <!-- Scripts -->
@@ -914,6 +918,31 @@ body.dark #scrollTopBtn:hover {
       scrollTopBtn.style.animation = "";
     }, 1200);
   });
+
+
+
+
+
+
+
+<script>
+  const namespace = "vidhi-portfolio";   // unique name
+  const key = "homepage";
+
+  fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("visitor-count").innerText = data.value;
+    })
+    .catch(() => {
+      document.getElementById("visitor-count").innerText = "N/A";
+    });
+</script>
+
+
+
+
+   
 </script>
 
 
@@ -923,6 +952,7 @@ body.dark #scrollTopBtn:hover {
 </body>
 
 </html>
+
 
 
 
