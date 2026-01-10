@@ -919,31 +919,32 @@ body.dark #scrollTopBtn:hover {
     }, 1200);
   });
 
+</script>
 
 
 
 
 
 
-
-  const namespace = "vidhi-portfolio";   // unique name
-  const key = "homepage";
-
-  fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+  <script>
+  fetch("https://api.countapi.xyz/hit/vidhi-kalariya-portfolio/home")
     .then(res => res.json())
     .then(data => {
       document.getElementById("visitor-count").innerText = data.value;
     })
-    .catch(() => {
+    .catch(err => {
+      console.error("Visitor counter error:", err);
       document.getElementById("visitor-count").innerText = "N/A";
     });
+</script>
+
 
 
 
 
 
    
-</script>
+
 
 
   <!-- Scroll to Top Rocket Button -->
@@ -952,6 +953,7 @@ body.dark #scrollTopBtn:hover {
 </body>
 
 </html>
+
 
 
 
