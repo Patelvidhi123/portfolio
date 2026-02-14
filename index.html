@@ -455,6 +455,32 @@ body.dark .project-card:hover {
   box-shadow: 0 0 25px rgba(0, 150, 255, 0.7), 0 0 50px rgba(0, 150, 255, 0.4);
 }
 
+
+
+.hire-me{
+background: linear-gradient(135deg, #84fab0, #8fd3f4);
+padding:80px 20px;
+}
+
+body.dark .hire-me{
+background: linear-gradient(135deg, #0f2027, #203a43);
+}
+
+.hire-me form{
+max-width:500px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:15px;
+}
+
+body.dark .hire-me form{
+background:#1c1c1c;
+color:white;
+}
+
+    
+
 /* Contact Section (Light Mode) */
 .contact {
   background: linear-gradient(135deg, #a18cd1, #fbc2eb, #84fab0);
@@ -603,6 +629,8 @@ body.dark footer span#visitor-count {
           <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
           <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="#hire">Hire Me</a></li>
+
         </ul>
       </div>
     </div>
@@ -709,7 +737,43 @@ body.dark footer span#visitor-count {
 </section>
 
 
+<!-- Hire Me Section -->
+<section class="hire-me fade-in" id="hire">
+  <div class="container">
+    <h2 class="text-center mb-4">💼 Hire Me</h2>
 
+    <form id="hireForm">
+
+      <div class="mb-3">
+        <input type="text" id="hireName" class="form-control" placeholder="Your Name *" required>
+      </div>
+
+      <div class="mb-3">
+        <input type="email" id="hireEmail" class="form-control" placeholder="Your Email *" required>
+      </div>
+
+      <div class="mb-3">
+        <input type="text" id="hireProject" class="form-control" placeholder="Project Type *" required>
+      </div>
+
+      <div class="mb-3">
+        <input type="text" id="hireBudget" class="form-control" placeholder="Budget (Optional)">
+      </div>
+
+      <div class="mb-3">
+        <textarea id="hireMessage" class="form-control" rows="4" placeholder="Project Details *" required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-success w-100">
+        Send via WhatsApp
+      </button>
+
+    </form>
+
+  </div>
+</section>
+
+  
   <!-- Contact Section -->
   <section class="contact fade-in" id="contact">
     <div class="container">
@@ -896,6 +960,37 @@ body.dark footer span#visitor-count {
 </script>
 
 
+  <script>
+
+document.getElementById("hireForm").addEventListener("submit", function(e){
+
+e.preventDefault();
+
+let name = document.getElementById("hireName").value;
+let email = document.getElementById("hireEmail").value;
+let project = document.getElementById("hireProject").value;
+let budget = document.getElementById("hireBudget").value;
+let message = document.getElementById("hireMessage").value;
+
+let whatsappMessage =
+`Hello Vidhi,
+
+I want to hire you.
+
+Name: ${name}
+Email: ${email}
+Project: ${project}
+Budget: ${budget}
+Details: ${message}`;
+
+let url = `https://wa.me/917383533585?text=${encodeURIComponent(whatsappMessage)}`;
+
+window.open(url, "_blank");
+
+});
+
+</script>
+
 
    
 
@@ -907,6 +1002,7 @@ body.dark footer span#visitor-count {
 </body>
 
 </html>
+
 
 
 
